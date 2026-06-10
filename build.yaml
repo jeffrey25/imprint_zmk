@@ -1,7 +1,17 @@
 # GitHub Actions build matrix — Cyboard Imprint Wireless
+#
+# ZMK Studio is enabled on the LEFT/central half only (per ZMK docs):
+#   - snippet: studio-rpc-usb-uart  → adds the USB RPC transport Studio
+#     connects over, and auto-defines ZMK_BEHAVIORS_KEEP_ALL so every
+#     behavior is available to add from within Studio.
+#   - cmake-args: -DCONFIG_ZMK_STUDIO=y → turns the feature on.
+# The right/peripheral half does NOT get Studio (it would just waste RAM;
+# Studio always connects to the central over USB).
 ---
 include:
   - board: assimilator-bt
     shield: imprint_left
+    snippet: studio-rpc-usb-uart
+    cmake-args: -DCONFIG_ZMK_STUDIO=y
   - board: assimilator-bt
     shield: imprint_right
