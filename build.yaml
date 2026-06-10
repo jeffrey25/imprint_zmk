@@ -1,11 +1,4 @@
-# GitHub Actions build matrix for Cyboard Imprint Wireless
-# Board:  assimilator-bt  (nRF52840 on the Cyboard Imprint)
-# Shield: imprint_left / imprint_right
-#
-# To build: push to GitHub — Actions will produce:
-#   imprint_left-assimilator-bt-zmk.uf2
-#   imprint_right-assimilator-bt-zmk.uf2
-#
+# GitHub Actions build matrix — Cyboard Imprint Wireless
 ---
 include:
   - board: assimilator-bt
