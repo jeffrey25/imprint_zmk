@@ -1,25 +1,8 @@
 /*
  * Cyboard Imprint - ZMK Wireless Layout
  * Converted from QMK/Vial layout
- * Features: 6-layer setup with CAGS home row mods, VSCode shortcuts, symbols, numpad, mouse, and utilities
+ * Features: 10-layer setup with CAGS home row mods, layer taps, combos
  */
-
-#include <behaviors.dtsi>
-#include <dt-bindings/zmk/keys.h>
-#include <dt-bindings/zmk/bt.h>
-#include <dt-bindings/zmk/usb.h>
-#include <dt-bindings/zmk/mouse.h>
-
-#define DEFAULT 0
-#define NAV     1
-#define SYM     2
-#define NUM     3
-#define MOUSE   4
-#define UTIL    5
-#define VSCODE  6
-#define UNUSED  7
-#define UNUSED2 8
-#define UNUSED3 9
 
 / {
     behaviors {
@@ -69,49 +52,6 @@
             bindings = <&mo>, <&kp>;
             hold-trigger-key-positions = <0 1 2 3 4 24 25 26 27 28 29 30 31 32 33 34 35 36 37 38 39 40 41 42 43 44 45 46 47 48>;
         };
-
-        // Macros for complex sequences
-        macro_m0: macro_m0 {
-            compatible = "zmk,behavior-macro";
-            label = "MACRO_M0";
-            #binding-cells = <0>;
-            bindings = <&kp KP_NLCK>;
-        };
-
-        macro_m1: macro_m1 {
-            compatible = "zmk,behavior-macro";
-            label = "MACRO_M1";
-            #binding-cells = <0>;
-            bindings = <&kp KP_NLCK>;
-        };
-
-        macro_m2: macro_m2 {
-            compatible = "zmk,behavior-macro";
-            label = "MACRO_M2";
-            #binding-cells = <0>;
-            bindings = <&kp KP_NLCK>;
-        };
-
-        macro_m3: macro_m3 {
-            compatible = "zmk,behavior-macro";
-            label = "MACRO_M3";
-            #binding-cells = <0>;
-            bindings = <&kp KP_NLCK>;
-        };
-
-        macro_m4: macro_m4 {
-            compatible = "zmk,behavior-macro";
-            label = "MACRO_M4";
-            #binding-cells = <0>;
-            bindings = <&kp KP_NLCK>;
-        };
-
-        macro_m5: macro_m5 {
-            compatible = "zmk,behavior-macro";
-            label = "MACRO_M5";
-            #binding-cells = <0>;
-            bindings = <&kp KP_NLCK>;
-        };
     };
 
     combos {
@@ -119,29 +59,29 @@
         
         combo_m1 {
             timeout-ms = <50>;
-            key-positions = <17 19>;  // R U
-            bindings = <&macro_m1>;
+            key-positions = <17 19>;
+            bindings = <&kp KP_NLCK>;
             layers = <0>;
         };
 
         combo_m0 {
             timeout-ms = <50>;
-            key-positions = <9 26>;   // G H
-            bindings = <&macro_m0>;
+            key-positions = <9 26>;
+            bindings = <&kp KP_NLCK>;
             layers = <0>;
         };
 
         combo_m2 {
             timeout-ms = <50>;
-            key-positions = <8 27>;   // V M
-            bindings = <&macro_m2>;
+            key-positions = <8 27>;
+            bindings = <&kp KP_NLCK>;
             layers = <0>;
         };
 
         combo_m3 {
             timeout-ms = <50>;
-            key-positions = <28 2>;   // COMMA C
-            bindings = <&macro_m3>;
+            key-positions = <28 2>;
+            bindings = <&kp KP_NLCK>;
             layers = <0>;
         };
     };
@@ -152,7 +92,7 @@
         // Layer 0: Default QWERTY with home row mods
         default_layer {
             bindings = <
-    &none  &kp Q  &llt UTIL ESC  &llt SYM DEL  &none           &kp LGUI  &kp A  &llt NAV BSPC
+    &none  &kp Q  &llt 5 ESC  &llt 2 DEL  &none           &kp LGUI  &kp A  &llt 1 BSPC
     &none  &kp LCTRL  &kp LGUI  &kp LCTRL  &kp LGUI  &kp LCTRL  &none  &none
     &kp B  &kp V  &kp C  &kp X  &kp Z  &kp KP_DOT  &none  &none
     &kp G  &hml LGUI F  &hml LCTRL D  &hml LALT S  &hml LSFT A  &kp CAPS  &none  &none
@@ -160,7 +100,7 @@
     &kp N5  &kp N4  &kp N3  &kp N2  &kp N1  &kp GRAVE  &none  &none
     &none  &none  &none  &none  &none  &none  &none  &none
 
-    &none  &kp HYPER  &llt UTIL TAB  &llt SYM ENTER  &none      &kp LGUI  &llt MOUSE TAB  &llt NAV SPACE
+    &none  &kp HYPER  &llt 5 TAB  &llt 2 ENTER  &none      &kp LGUI  &llt 4 TAB  &lrt 1 SPACE
     &none  &kp RCTRL  &kp RCTRL  &kp RCTRL  &kp RGUI  &kp LGUI  &none  &none
     &kp N  &kp M  &kp COMMA  &kp DOT  &kp FSLH  &kp KP_DOT  &none  &none
     &kp H  &hmr RGUI J  &hmr RCTRL K  &hmr RALT L  &hmr RSFT SEMI  &kp SQT  &none  &none
@@ -170,10 +110,10 @@
             >;
         };
 
-        // Layer 1: Navigation & Editing
+        // Layer 1: Navigation
         nav_layer {
             bindings = <
-    &none  &trans  &llt UTIL ESC  &llt SYM DEL  &none           &trans  &trans  &llt DEFAULT BSPC
+    &none  &trans  &llt 5 ESC  &llt 2 DEL  &none           &trans  &trans  &llt 0 BSPC
     &none  &trans  &trans  &trans  &trans  &trans  &none  &none
     &kp KP_DOT  &kp LALT  &kp LCTRL  &kp LGUI  &kp LALT  &kp LGUI  &none  &none
     &kp LGUI  &kp LALT  &kp LGUI  &kp LGUI  &kp LALT  &none  &none  &none
@@ -181,7 +121,7 @@
     &trans  &trans  &trans  &trans  &trans  &trans  &none  &none
     &none  &none  &none  &none  &none  &none  &none  &none
 
-    &none  &trans  &llt UTIL KP_DOT  &llt MOUSE ENTER  &none     &trans  &llt MOUSE TAB  &llt DEFAULT SPACE
+    &none  &trans  &llt 5 KP_DOT  &llt 4 ENTER  &none     &trans  &llt 4 TAB  &lrt 0 SPACE
     &none  &trans  &trans  &trans  &trans  &trans  &none  &none
     &none  &kp LALT  &kp RGUI  &kp RGUI  &kp RALT  &none  &none  &none
     &kp RGUI  &kp LEFT  &kp UP  &kp DOWN  &kp RIGHT  &kp RGUI  &none  &none
@@ -191,10 +131,10 @@
             >;
         };
 
-        // Layer 2: Symbols & Operators
+        // Layer 2: Symbols
         sym_layer {
             bindings = <
-    &none  &none  &llt UTIL ESC  &llt DEFAULT DEL  &none           &trans  &kp KP_DOT  &llt DEFAULT BSPC
+    &none  &none  &llt 5 ESC  &llt 0 DEL  &none           &trans  &kp KP_DOT  &llt 0 BSPC
     &none  &kp KP_FSLH  &kp LSFT  &kp COMMA  &kp LSFT  &kp LSFT  &none  &none
     &kp KP_MINUS  &kp LSFT  &kp RBKT  &kp LBKT  &kp LSFT  &kp LSFT  &none  &none
     &kp KP_ASTERISK  &kp LSFT  &kp LSFT  &kp SQT  &kp EQUAL  &kp LSFT  &none  &none
@@ -202,7 +142,7 @@
     &kp LSFT  &kp LSFT  &kp LSFT  &kp LSFT  &kp LSFT  &kp GRAVE  &none  &none
     &none  &none  &none  &none  &none  &none  &none  &none
 
-    &none  &trans  &trans  &llt DEFAULT ENTER  &none             &trans  &llt MOUSE DEL  &llt DEFAULT SPACE
+    &none  &trans  &trans  &llt 0 ENTER  &none             &trans  &llt 4 DEL  &lrt 0 SPACE
     &none  &none  &none  &none  &none  &none  &none  &none
     &none  &none  &none  &none  &none  &none  &none  &none
     &none  &kp RGUI  &kp RSHIFT  &kp RALT  &kp RCTRL  &none  &none  &none
@@ -212,10 +152,10 @@
             >;
         };
 
-        // Layer 3: Numpad & Functions
+        // Layer 3: Numpad
         num_layer {
             bindings = <
-    &none  &trans  &llt UTIL ESC  &llt SYM SPACE  &none            &trans  &trans  &llt DEFAULT BSPC
+    &none  &trans  &llt 5 ESC  &llt 2 SPACE  &none            &trans  &trans  &llt 0 BSPC
     &none  &none  &none  &none  &none  &none  &none  &none
     &none  &none  &none  &none  &none  &none  &none  &none
     &none  &none  &none  &none  &none  &none  &none  &none
@@ -223,7 +163,7 @@
     &kp F6  &kp F5  &kp F4  &kp F3  &kp F2  &kp F1  &none  &none
     &none  &none  &none  &none  &none  &none  &none  &none
 
-    &none  &trans  &trans  &llt SYM ENTER  &none               &trans  &llt MOUSE DEL  &llt SYM TAB
+    &none  &trans  &trans  &llt 2 ENTER  &none               &trans  &llt 4 DEL  &llt 2 TAB
     &none  &kp KP_N0  &kp KP_DOT  &kp KP_EQUAL  &kp KP_PLUS  &none  &none  &none
     &none  &kp KP_N1  &kp KP_N2  &kp KP_N3  &kp KP_MINUS  &none  &none  &none
     &none  &kp KP_N4  &kp KP_N5  &kp KP_N6  &kp KP_ASTERISK  &none  &none  &none
@@ -233,18 +173,18 @@
             >;
         };
 
-        // Layer 4: Mouse Control
+        // Layer 4: Mouse
         mouse_layer {
             bindings = <
-    &none  &trans  &llt UTIL ESC  &llt SYM SPACE  &none            &trans  &trans  &llt DEFAULT BSPC
+    &none  &trans  &llt 5 ESC  &llt 2 SPACE  &none            &trans  &trans  &llt 0 BSPC
     &none  &none  &none  &none  &none  &none  &none  &none
     &none  &none  &none  &none  &none  &none  &none  &none
-    &none  &mmv MOVE_UP  &mmv MOVE_DOWN  &mmv MOVE_UP  &mmv MOVE_DOWN  &none  &none  &none
+    &none  &none  &none  &none  &none  &none  &none  &none
     &none  &none  &none  &none  &none  &none  &none  &none
     &none  &none  &none  &none  &none  &none  &none  &none
     &none  &none  &none  &none  &none  &none  &none  &none
 
-    &none  &trans  &llt SYM KP_DOT  &llt NUM ENTER  &none             &trans  &llt NUM DEL  &llt DEFAULT TAB
+    &none  &trans  &llt 2 KP_DOT  &llt 3 ENTER  &none             &trans  &llt 3 DEL  &llt 0 TAB
     &none  &none  &none  &none  &none  &none  &none  &none
     &none  &none  &none  &none  &none  &none  &none  &none
     &none  &none  &none  &none  &none  &none  &none  &none
@@ -254,31 +194,10 @@
             >;
         };
 
-        // Layer 5: Utilities & Shortcuts
+        // Layer 5: Utilities
         util_layer {
             bindings = <
-    &none  &trans  &llt DEFAULT ESC  &llt SYM SPACE  &none            &trans  &trans  &llt DEFAULT BSPC
-    &none  &trans  &trans  &trans  &trans  &trans  &none  &none
-    &trans  &trans  &macro_m5  &macro_m4  &trans  &trans  &none  &none
-    &kp C_VOL_DN  &kp LGUI  &kp C_VOL_UP  &kp LGUI  &kp LGUI  &trans  &none  &none
-    &kp LSFT  &kp LGUI  &kp C_VOL_UP  &kp LGUI  &kp LGUI  &trans  &none  &none
-    &trans  &trans  &trans  &trans  &trans  &trans  &none  &none
-    &none  &none  &none  &none  &none  &none  &none  &none
-
-    &none  &trans  &trans  &llt DEFAULT ENTER  &none               &trans  &llt NUM DEL  &llt SYM TAB
-    &none  &trans  &trans  &trans  &trans  &trans  &none  &none
-    &trans  &trans  &trans  &trans  &trans  &trans  &none  &none
-    &kp F12  &kp LALT  &kp LALT  &kp RSFT  &kp LGUI  &trans  &none  &none
-    &kp LCTRL  &kp LGUI  &kp RGUI  &kp SGUI  &kp SGUI  &none  &none  &none
-    &trans  &trans  &trans  &trans  &trans  &trans  &none  &none
-    &none  &none  &none  &none  &none  &none  &none  &none
-            >;
-        };
-
-        // Layer 6: VSCode & Application shortcuts
-        vscode_layer {
-            bindings = <
-    &none  &trans  &llt DEFAULT ESC  &llt SYM SPACE  &none            &trans  &trans  &llt DEFAULT BSPC
+    &none  &trans  &llt 0 ESC  &llt 2 SPACE  &none            &trans  &trans  &llt 0 BSPC
     &none  &trans  &trans  &trans  &trans  &trans  &none  &none
     &trans  &trans  &trans  &trans  &trans  &trans  &none  &none
     &trans  &trans  &trans  &trans  &trans  &trans  &none  &none
@@ -286,7 +205,7 @@
     &trans  &trans  &trans  &trans  &trans  &trans  &none  &none
     &none  &none  &none  &none  &none  &none  &none  &none
 
-    &none  &trans  &trans  &llt DEFAULT ENTER  &none               &trans  &llt NUM DEL  &llt SYM TAB
+    &none  &trans  &trans  &llt 0 ENTER  &none               &trans  &llt 3 DEL  &llt 2 TAB
     &none  &trans  &trans  &trans  &trans  &trans  &none  &none
     &trans  &trans  &trans  &trans  &trans  &trans  &none  &none
     &trans  &trans  &trans  &trans  &trans  &trans  &none  &none
@@ -296,10 +215,10 @@
             >;
         };
 
-        // Layer 7-9: Unused/Placeholder layers
-        unused_layer {
+        // Layers 6-9: Unused (placeholder)
+        unused_layer_6 {
             bindings = <
-    &none  &trans  &llt DEFAULT ESC  &llt SYM SPACE  &none            &trans  &trans  &llt DEFAULT BSPC
+    &none  &trans  &trans  &trans  &none            &trans  &trans  &trans
     &none  &trans  &trans  &trans  &trans  &trans  &none  &none
     &trans  &trans  &trans  &trans  &trans  &trans  &none  &none
     &trans  &trans  &trans  &trans  &trans  &trans  &none  &none
@@ -307,7 +226,7 @@
     &trans  &trans  &trans  &trans  &trans  &trans  &none  &none
     &none  &none  &none  &none  &none  &none  &none  &none
 
-    &none  &trans  &trans  &llt DEFAULT ENTER  &none               &trans  &llt NUM DEL  &llt SYM TAB
+    &none  &trans  &trans  &trans  &none             &trans  &trans  &trans
     &none  &trans  &trans  &trans  &trans  &trans  &none  &none
     &trans  &trans  &trans  &trans  &trans  &trans  &none  &none
     &trans  &trans  &trans  &trans  &trans  &trans  &none  &none
@@ -317,9 +236,9 @@
             >;
         };
 
-        unused_layer_2 {
+        unused_layer_7 {
             bindings = <
-    &none  &trans  &llt DEFAULT ESC  &llt SYM SPACE  &none            &trans  &trans  &llt DEFAULT BSPC
+    &none  &trans  &trans  &trans  &none            &trans  &trans  &trans
     &none  &trans  &trans  &trans  &trans  &trans  &none  &none
     &trans  &trans  &trans  &trans  &trans  &trans  &none  &none
     &trans  &trans  &trans  &trans  &trans  &trans  &none  &none
@@ -327,7 +246,7 @@
     &trans  &trans  &trans  &trans  &trans  &trans  &none  &none
     &none  &none  &none  &none  &none  &none  &none  &none
 
-    &none  &trans  &trans  &llt DEFAULT ENTER  &none               &trans  &llt NUM DEL  &llt SYM TAB
+    &none  &trans  &trans  &trans  &none             &trans  &trans  &trans
     &none  &trans  &trans  &trans  &trans  &trans  &none  &none
     &trans  &trans  &trans  &trans  &trans  &trans  &none  &none
     &trans  &trans  &trans  &trans  &trans  &trans  &none  &none
@@ -337,9 +256,9 @@
             >;
         };
 
-        unused_layer_3 {
+        unused_layer_8 {
             bindings = <
-    &none  &trans  &llt DEFAULT ESC  &llt SYM SPACE  &none            &trans  &trans  &llt DEFAULT BSPC
+    &none  &trans  &trans  &trans  &none            &trans  &trans  &trans
     &none  &trans  &trans  &trans  &trans  &trans  &none  &none
     &trans  &trans  &trans  &trans  &trans  &trans  &none  &none
     &trans  &trans  &trans  &trans  &trans  &trans  &none  &none
@@ -347,7 +266,27 @@
     &trans  &trans  &trans  &trans  &trans  &trans  &none  &none
     &none  &none  &none  &none  &none  &none  &none  &none
 
-    &none  &trans  &trans  &llt DEFAULT ENTER  &none               &trans  &llt NUM DEL  &llt SYM TAB
+    &none  &trans  &trans  &trans  &none             &trans  &trans  &trans
+    &none  &trans  &trans  &trans  &trans  &trans  &none  &none
+    &trans  &trans  &trans  &trans  &trans  &trans  &none  &none
+    &trans  &trans  &trans  &trans  &trans  &trans  &none  &none
+    &trans  &trans  &trans  &trans  &trans  &trans  &none  &none
+    &trans  &trans  &trans  &trans  &trans  &trans  &none  &none
+    &none  &none  &none  &none  &none  &none  &none  &none
+            >;
+        };
+
+        unused_layer_9 {
+            bindings = <
+    &none  &trans  &trans  &trans  &none            &trans  &trans  &trans
+    &none  &trans  &trans  &trans  &trans  &trans  &none  &none
+    &trans  &trans  &trans  &trans  &trans  &trans  &none  &none
+    &trans  &trans  &trans  &trans  &trans  &trans  &none  &none
+    &trans  &trans  &trans  &trans  &trans  &trans  &none  &none
+    &trans  &trans  &trans  &trans  &trans  &trans  &none  &none
+    &none  &none  &none  &none  &none  &none  &none  &none
+
+    &none  &trans  &trans  &trans  &none             &trans  &trans  &trans
     &none  &trans  &trans  &trans  &trans  &trans  &none  &none
     &trans  &trans  &trans  &trans  &trans  &trans  &none  &none
     &trans  &trans  &trans  &trans  &trans  &trans  &none  &none
