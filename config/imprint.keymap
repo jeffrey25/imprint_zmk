@@ -55,17 +55,6 @@
 #include <dt-bindings/zmk/outputs.h>
 #include <dt-bindings/zmk/pointing.h>
 
-/* ZMK Studio unlock.
- * Studio is enabled only on the LEFT/central build (see build.yaml), so the
- * &studio_unlock behavior only exists there. This shared keymap is also built
- * for the right half, where it must fall back to &trans to avoid an
- * "undefined &studio_unlock" devicetree error. */
-#ifdef CONFIG_ZMK_STUDIO
-#define STUDIO_UNLOCK &studio_unlock
-#else
-#define STUDIO_UNLOCK &trans
-#endif
-
 / {
     /* Matrix transform selected by the stock keymap — this is the key-position
      * order the bindings below (thumbs included) are written against. */
@@ -225,7 +214,7 @@
         nav_layer {
             display-name = "Nav";
             bindings = <
-/* Num  L */  STUDIO_UNLOCK    &trans           &trans           &trans           &trans           &trans
+/* Num  L */  &trans           &trans           &trans           &trans           &trans           &trans
 /* Num  R */  &trans           &trans           &trans           &trans           &trans           &trans
 /* Top  L */  &kp LG(Y)        &kp LG(Z)        &kp LG(X)        &kp LG(C)        &kp LG(V)        &kp LS(LG(V))
 /* Top  R */  &none            &kp LG(UP)       &kp LA(UP)       &kp RA(DOWN)     &kp RG(DOWN)     &none
