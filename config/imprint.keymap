@@ -163,6 +163,16 @@
             require-prior-idle-ms = <125>;
             bindings = <&kp>, <&kp>;
         };
+
+        /* Bottom-left corner key (inner-row outermost, position 24 — the
+         * TD(0) key on the wired board): 1 tap = nothing, 2 taps = bootloader.
+         * tapping-term 200ms matches the Vial tap-dance term. */
+        td_boot: tap_dance_bootloader {
+            compatible = "zmk,behavior-tap-dance";
+            #binding-cells = <0>;
+            tapping-term-ms = <200>;
+            bindings = <&none>, <&bootloader>;
+        };
     };
 
     /* ═══════════════════════════════════════════════════════
@@ -187,7 +197,7 @@
 /* Home R */  &kp H            &hm RGUI J       &hm RCTRL K      &hm RALT L       &hm RSHFT SEMI   &kp SQT
 /* Bot  L */  &none            &kp Z            &kp X            &kp C            &kp V            &kp B
 /* Bot  R */  &kp N            &kp M            &kp COMMA        &kp DOT          &kp FSLH         &none
-/* Innr L */  &none            &kp LS(LG(LBKT)) &kp LC(GRAVE)    &kp LG(GRAVE)    &kp LC(LEFT)
+/* Innr L */  &td_boot         &kp LS(LG(LBKT)) &kp LC(GRAVE)    &kp LG(GRAVE)    &kp LC(LEFT)
 /* Innr R */  &kp RC(RIGHT)    &kp RC(UP)       &kp LC(LS(GRAVE)) &kp LS(LG(RBKT)) &none
 /* Thm  L */  &lt 2 BSPC      &kp LS(LG(A))    &none            &kp LC(LG(Q))    &lt 5 DEL        &lt 1 ESC
 /* Thm  R */  &none            &lt 4 TAB        &lt 2 SPACE      &lt 1 RET        &lt 5 TAB        &kp LS(LC(LA(LG(C))))
