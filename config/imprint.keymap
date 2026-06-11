@@ -213,13 +213,18 @@
         base_layer {
             display-name = "Base";
             bindings = <
-&kp GRAVE   &kp N1            &kp N2         &kp N3         &kp N4        &kp N5                          &kp N6                 &kp N7         &kp N8       &kp N9             &kp N0            &kp MINUS
-&kp TAB     &kp Q             &kp W          &kp E          &kp R         &kp T                           &kp Y                  &kp U          &kp I        &kp O              &kp P             &kp BSLH
-&caps_word  &hm LSHFT A       &hm LALT S     &hm LCTRL D    &hm LGUI F    &kp G                           &kp H                  &hm RGUI J     &hm RCTRL K  &hm RALT L         &hm RSHFT SEMI    &kp SQT
-&caps_word  &kp Z             &kp X          &kp C          &kp V         &kp B                           &kp N                  &kp M          &kp COMMA    &kp DOT            &kp FSLH          &none
-&td_boot    &kp LS(LG(LBKT))  &kp LC(GRAVE)  &kp LG(GRAVE)  &kp LC(LEFT)                                                         &kp RC(RIGHT)  &kp RC(UP)   &kp LC(LS(GRAVE))  &kp LS(LG(RBKT))  &td_boot
-                                                            &lt 1 ESC     &lt 5 DEL      &kp LC(LG(Q))    &kp LS(LC(LA(LG(C))))  &lt 5 TAB      &lt 1 RET
-                                                            &lt 2 BSPC    &kp LS(LG(A))  &none            &mo 6                  &lt 4 TAB      &lt 2 SPACE
+/* Num  L */  &kp GRAVE        &kp N1           &kp N2           &kp N3           &kp N4           &kp N5
+/* Num  R */  &kp N6           &kp N7           &kp N8           &kp N9           &kp N0           &kp MINUS
+/* Top  L */  &kp TAB          &kp Q            &kp W            &kp E            &kp R            &kp T
+/* Top  R */  &kp Y            &kp U            &kp I            &kp O            &kp P            &kp BSLH
+/* Home L */  &kp CAPS         &hm LSHFT A      &hm LALT S       &hm LCTRL D      &hm LGUI F       &kp G
+/* Home R */  &kp H            &hm RGUI J       &hm RCTRL K      &hm RALT L       &hm RSHFT SEMI   &kp SQT
+/* Bot  L */  &caps_word       &kp Z            &kp X            &kp C            &kp V            &kp B
+/* Bot  R */  &kp N            &kp M            &kp COMMA        &kp DOT          &kp FSLH         &none
+/* Innr L */  &td_boot         &kp LS(LG(LBKT)) &kp LC(GRAVE)    &kp LG(GRAVE)    &kp LC(LEFT)
+/* Innr R */  &kp RC(RIGHT)    &kp RC(UP)       &kp LC(LS(GRAVE)) &kp LS(LG(RBKT)) &td_boot
+/* ThmA  L|R */  &lt 1 ESC             &lt 5 DEL             &kp LC(LG(Q))           &kp LS(LC(LA(LG(C)))) &lt 5 TAB             &lt 1 RET
+/* ThmB  L|R */  &lt 2 BSPC            &kp LS(LG(A))         &mo 7                   &mo 6                 &lt 4 TAB             &lt 2 SPACE
             >;
         };
 
@@ -299,8 +304,8 @@
         };
 
         /* ── 6: RGB ──────────────────────────────────────────────
-         * Toggled via &tog 6 on the right thumb cluster's unassigned key
-         * (tap to enter this layer, tap the same key again to leave).
+         * Held via &mo 6 on the right thumb cluster's unassigned key
+         * (hold to use this layer, release to leave).
          * All controls are on the LEFT hand:
          *   Top row:    Q=toggle on/off   W=next effect   E=prev effect
          *   Home row (increase):  A=hue+   S=sat+   D=bright+   F=speed+
@@ -310,13 +315,41 @@
         rgb_layer {
             display-name = "RGB";
             bindings = <
-&trans  &trans           &trans           &trans           &trans           &trans            &trans  &trans  &trans  &trans  &trans  &trans
-&trans  &rgb_ug RGB_TOG  &rgb_ug RGB_EFF  &rgb_ug RGB_EFR  &trans           &trans            &trans  &trans  &trans  &trans  &trans  &trans
-&trans  &rgb_ug RGB_HUI  &rgb_ug RGB_SAI  &rgb_ug RGB_BRI  &rgb_ug RGB_SPI  &trans            &trans  &trans  &trans  &trans  &trans  &trans
-&trans  &rgb_ug RGB_HUD  &rgb_ug RGB_SAD  &rgb_ug RGB_BRD  &rgb_ug RGB_SPD  &trans            &trans  &trans  &trans  &trans  &trans  &trans
-&trans  &trans           &trans           &trans           &trans                                     &trans  &trans  &trans  &trans  &trans
-                                                           &trans           &trans  &trans    &trans  &trans  &trans
-                                                           &trans           &trans  &trans    &mo 6   &trans  &trans
+/* Num  L */  &trans           &trans           &trans           &trans           &trans           &trans
+/* Num  R */  &trans           &trans           &trans           &trans           &trans           &trans
+/* Top  L */  &trans           &rgb_ug RGB_TOG  &rgb_ug RGB_EFF  &rgb_ug RGB_EFR  &trans           &trans
+/* Top  R */  &trans           &trans           &trans           &trans           &trans           &trans
+/* Home L */  &trans           &rgb_ug RGB_HUI  &rgb_ug RGB_SAI  &rgb_ug RGB_BRI  &rgb_ug RGB_SPI  &trans
+/* Home R */  &trans           &trans           &trans           &trans           &trans           &trans
+/* Bot  L */  &trans           &rgb_ug RGB_HUD  &rgb_ug RGB_SAD  &rgb_ug RGB_BRD  &rgb_ug RGB_SPD  &trans
+/* Bot  R */  &trans           &trans           &trans           &trans           &trans           &trans
+/* Innr L */  &trans           &trans           &trans           &trans           &trans
+/* Innr R */  &trans           &trans           &trans           &trans           &trans
+/* ThmA  L|R */  &trans                &trans                &trans                  &trans                &trans                &trans
+/* ThmB  L|R */  &trans                &trans                &trans                  &trans                &trans                &trans
+            >;
+        };
+
+        /* ── 7: Media (momentary — hold the empty left-thumb key) ──
+         * Controls sit on the RIGHT hand so they're reachable while the
+         * left thumb holds the layer:
+         *   Home row:  J=play/pause   K=vol−   L=vol+   ;=mute
+         *   Top row:   U=prev track   I=next track   O=bright−   P=bright+ */
+        media_layer {
+            display-name = "Media";
+            bindings = <
+/* Num  L */  &trans           &trans           &trans           &trans           &trans           &trans
+/* Num  R */  &trans           &trans           &trans           &trans           &trans           &trans
+/* Top  L */  &trans           &trans           &trans           &trans           &trans           &trans
+/* Top  R */  &trans           &kp C_PREV       &kp C_NEXT       &kp C_BRI_DN     &kp C_BRI_UP     &trans
+/* Home L */  &trans           &trans           &trans           &trans           &trans           &trans
+/* Home R */  &trans           &kp C_PP         &kp C_VOL_DN     &kp C_VOL_UP     &kp C_MUTE       &trans
+/* Bot  L */  &trans           &trans           &trans           &trans           &trans           &trans
+/* Bot  R */  &trans           &trans           &trans           &trans           &trans           &trans
+/* Innr L */  &trans           &trans           &trans           &trans           &trans
+/* Innr R */  &trans           &trans           &trans           &trans           &trans
+/* ThmA  L|R */  &trans                &trans                &trans                  &trans                &trans                &trans
+/* ThmB  L|R */  &trans                &trans                &trans                  &trans                &trans                &trans
             >;
         };
     };
