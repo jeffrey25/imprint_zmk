@@ -2,29 +2,18 @@
  * Cyboard Imprint Wireless — ZMK keymap
  * Generated from cyboard_wired.vil (Vial JSON export, version 1)
  *
- * ── Physical layout ──────────────────────────────────────────────
- * 35 keys per half = 70 total
- *
- * Left half key order (positions 0–34):
- *   Num  row [0–5  ]: GRAVE 1 2 3 4 5
- *   Top  row [6–11 ]: TAB Q W E R T
- *   Home row [12–17]: CAPS A(HRM) S(HRM) D(HRM) F(HRM) G
- *   Bot  row [18–23]: — Z X C V B
- *   Innr row [24–28]: — SGUI([) LCTL(`) LGUI(`) LCTL(←)
- *   Thumb out[29–31]: LT2(BSPC) SGUI(A) —
- *   Thumb inn[32–34]: LCG(Q) LT5(DEL) LT1(ESC)
- *
- * Right half key order (positions 35–69):
- *   Num  row [35–40]: 6 7 8 9 0 -
- *   Top  row [41–46]: Y U I O P \
- *   Home row [47–52]: H J(HRM) K(HRM) L(HRM) ;(HRM) '
- *   Bot  row [53–58]: N M , . / —
- *   Innr row [59–63]: RCTL(→) RCTL(↑) LCTL(LSFT(`)) SGUI(]) —
- *   Thumb out[64–66]: — LT4(TAB) LT2(SPACE)
- *   Thumb inn[67–69]: LT1(ENTER) LT5(TAB) HYPR(C)
+ * ── Physical layout (binding order) ───────────────────────────────
+ * 70 keys, interleaved LEFT-then-RIGHT within each row:
+ *   Num   [ 0– 5 L | 6–11  R]:  L: GRAVE 1 2 3 4 5     R: 6 7 8 9 0 -
+ *   Top   [12–17 L | 18–23 R]:  L: TAB Q W E R T       R: Y U I O P \
+ *   Home  [24–29 L | 30–35 R]:  L: CAPS A(HRM) S(HRM) D(HRM) F(HRM) G   R: H J(HRM) K(HRM) L(HRM) ;(HRM) '
+ *   Bot   [36–41 L | 42–47 R]:  L: CapsWd Z X C V B    R: N M , . / —
+ *   Innr  [48–52 L | 53–57 R]:  outer corners (48 & 57) = td_boot
+ *   ThmA  [58–60 L | 61–63 R]:  top thumb row
+ *   ThmB  [64–69]:  bottom thumb row — 66 = &mo 7 (Media), 67 = &mo 6 (RGB)
  *
  * ── Layers ───────────────────────────────────────────────────────
- *   0 BASE  1 NAV  2 SYM  3 FN/NUM  4 MOUSE  5 APP
+ *   0 BASE  1 NAV  2 SYM  3 FN/NUM  4 MOUSE  5 APP  6 RGB  7 MEDIA
  *
  * ── Macros ───────────────────────────────────────────────────────
  *   m0 = ":="   m1 = "!="   m2 = ">="   m3 = "<="
@@ -32,10 +21,10 @@
  *   m5 = LG(K)+LG(U)  (VSCode uncomment block)
  *
  * ── Combos ───────────────────────────────────────────────────────
- *   R(10) + U(42)      → m1  "!="
- *   G(17) + H(47)      → m0  ":="
- *   V(22) + M(54)      → m2  ">="
- *   ,(55) + C(21)      → m3  "<="
+ *   R(16) + U(19)      → m1  "!="
+ *   G(29) + H(30)      → m0  ":="
+ *   V(40) + M(43)      → m2  ">="
+ *   ,(44) + C(39)      → m3  "<="
  *
  * ── Home-row mods ────────────────────────────────────────────────
  *   Left : CAPS | A=LSHFT | S=LALT | D=LCTRL | F=LGUI | G
@@ -128,31 +117,31 @@
     combos {
         compatible = "zmk,combos";
 
-        /* R(pos 10) + U(pos 42) → "!=" */
+        /* R(pos 16) + U(pos 19) → "!=" */
         combo_neq {
             timeout-ms = <50>;
-            key-positions = <10 42>;
+            key-positions = <16 19>;
             bindings = <&m1>;
         };
 
-        /* G(pos 17) + H(pos 47) → ":=" */
+        /* G(pos 29) + H(pos 30) → ":=" */
         combo_assign {
             timeout-ms = <50>;
-            key-positions = <17 47>;
+            key-positions = <29 30>;
             bindings = <&m0>;
         };
 
-        /* V(pos 22) + M(pos 54) → ">=" */
+        /* V(pos 40) + M(pos 43) → ">=" */
         combo_gte {
             timeout-ms = <50>;
-            key-positions = <22 54>;
+            key-positions = <40 43>;
             bindings = <&m2>;
         };
 
-        /* ,(pos 55) + C(pos 21) → "<=" */
+        /* ,(pos 44) + C(pos 39) → "<=" */
         combo_lte {
             timeout-ms = <50>;
-            key-positions = <55 21>;
+            key-positions = <44 39>;
             bindings = <&m3>;
         };
     };
@@ -172,7 +161,7 @@
         };
 
         /* Bottom-outer corner on each half (inner-row outermost key:
-         * position 24 on the left, position 63 on the right — the left one
+         * position 48 on the left, position 57 on the right — the left one
          * is the TD(0) key on the wired board). 1 tap = nothing, 2 taps =
          * bootloader. &bootloader is source-aware, so each corner resets its
          * own half. tapping-term 200ms matches the Vial tap-dance term. */
