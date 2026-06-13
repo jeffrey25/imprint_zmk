@@ -31,7 +31,8 @@
  *   Right: H    | J=RGUI  | K=RCTRL| L=RALT  | ;=RSHFT| '
  *   flavor=balanced, tapping-term=175ms, quick-tap=270ms, prior-idle=125ms.
  *   Mod engages only when the next key is on the opposite hand or a thumb. */
- *
+
+*
  * ── Vial timing settings used ────────────────────────────────────
  *   setting  2 = 50   → tap_code delay
  *   setting  4 = 175  → tapping_term_ms
@@ -39,18 +40,17 @@
  *   setting 10 = 50   → combo timeout
  */
 
-#include <behaviors.dtsi>
-#include <dt-bindings/zmk/keys.h>
-#include <dt-bindings/zmk/bt.h>
-#include <dt-bindings/zmk/outputs.h>
-#include <dt-bindings/zmk/pointing.h>
-#include <dt-bindings/zmk/rgb.h>
 #include <input/processors.dtsi>
 #include <dt-bindings/zmk/input_transform.h>
+#include <behaviors.dtsi>
+#include <dt-bindings/zmk/keys.h>
+#include <dt-bindings/zmk/pointing.h>
+#include <dt-bindings/zmk/rgb.h>
 
 /* ── Key-position groups for positional home-row mods ──────────────
  * Used by &hml / &hmr so a modifier only engages when the *next* key is
  * on the opposite hand (or a thumb) — never during a same-hand roll. */
+
 #define KEYS_L  0  1  2  3  4  5  12 13 14 15 16 17 24 25 26 27 28 29 36 37 38 39 40 41 48 49 50 51 52
 #define KEYS_R  6  7  8  9  10 11 18 19 20 21 22 23 30 31 32 33 34 35 42 43 44 45 46 47 53 54 55 56 57
 #define THUMBS  58 59 60 61 62 63 64 65 66 67 68 69
@@ -58,13 +58,16 @@
 / {
     /* Matrix transform selected by the stock keymap — this is the key-position
      * order the bindings below (thumbs included) are written against. */
+
     chosen { zmk,matrix-transform = &imprint_number_row_full_bottom_row; };
 
     /* ═══════════════════════════════════════════════════════
      *  MACROS
      * ═══════════════════════════════════════════════════════ */
+
     macros {
         /* m0 — type ":=" */
+
         m0: macro_assign {
             compatible = "zmk,behavior-macro";
             #binding-cells = <0>;
@@ -74,6 +77,7 @@
         };
 
         /* m1 — type "!=" */
+
         m1: macro_neq {
             compatible = "zmk,behavior-macro";
             #binding-cells = <0>;
@@ -83,6 +87,7 @@
         };
 
         /* m2 — type ">=" */
+
         m2: macro_gte {
             compatible = "zmk,behavior-macro";
             #binding-cells = <0>;
@@ -92,6 +97,7 @@
         };
 
         /* m3 — type "<=" */
+
         m3: macro_lte {
             compatible = "zmk,behavior-macro";
             #binding-cells = <0>;
@@ -101,6 +107,7 @@
         };
 
         /* m4 — LG(K) then LG(C)  (VSCode: comment selected lines) */
+
         m4: macro_vsc_comment {
             compatible = "zmk,behavior-macro";
             #binding-cells = <0>;
@@ -110,6 +117,7 @@
         };
 
         /* m5 — LG(K) then LG(U)  (VSCode: uncomment selected lines) */
+
         m5: macro_vsc_uncomment {
             compatible = "zmk,behavior-macro";
             #binding-cells = <0>;
@@ -122,10 +130,12 @@
     /* ═══════════════════════════════════════════════════════
      *  COMBOS  (timeout 50 ms from Vial setting 10)
      * ═══════════════════════════════════════════════════════ */
+
     combos {
         compatible = "zmk,combos";
 
         /* R(pos 16) + U(pos 19) → "!=" */
+
         combo_neq {
             timeout-ms = <50>;
             key-positions = <16 19>;
@@ -133,6 +143,7 @@
         };
 
         /* G(pos 29) + H(pos 30) → ":=" */
+
         combo_assign {
             timeout-ms = <50>;
             key-positions = <29 30>;
@@ -140,6 +151,7 @@
         };
 
         /* V(pos 40) + M(pos 43) → ">=" */
+
         combo_gte {
             timeout-ms = <50>;
             key-positions = <40 43>;
@@ -147,6 +159,7 @@
         };
 
         /* ,(pos 44) + C(pos 39) → "<=" */
+
         combo_lte {
             timeout-ms = <50>;
             key-positions = <44 39>;
@@ -157,11 +170,13 @@
     /* ═══════════════════════════════════════════════════════
      *  BEHAVIORS — positional (split) home-row mod-taps
      * ═══════════════════════════════════════════════════════ */
+
     behaviors {
         /* Left-hand home-row mods. The hold (modifier) only triggers when
          * the next key is on the right hand or a thumb, so same-hand rolls
          * like "sad"/"wef" stay taps. hold-trigger-on-release still lets you
          * stack two same-hand mods (e.g. F+A = Cmd+Shift). */
+
         hml: homerow_mod_left {
             compatible = "zmk,behavior-hold-tap";
             #binding-cells = <2>;
@@ -175,6 +190,7 @@
         };
 
         /* Right-hand home-row mods — mirror of hml (triggers on left + thumbs). */
+
         hmr: homerow_mod_right {
             compatible = "zmk,behavior-hold-tap";
             #binding-cells = <2>;
@@ -195,120 +211,97 @@
      *    Left  half: Num(6) Top(6) Home(6) Bot(6) Innr(5) Thumb(6)
      *    Right half: Num(6) Top(6) Home(6) Bot(6) Innr(5) Thumb(6)
      * ═══════════════════════════════════════════════════════ */
+
     keymap {
         compatible = "zmk,keymap";
 
         /* ── 0: Base ──────────────────────────────────────── */
+
         base_layer {
             display-name = "Base";
             bindings = <
-/* Num  L */  &kp GRAVE        &kp N1           &kp N2           &kp N3           &kp N4           &kp N5
-/* Num  R */  &kp N6           &kp N7           &kp N8           &kp N9           &kp N0           &kp MINUS
-/* Top  L */  &kp TAB          &kp Q            &kp W            &kp E            &kp R            &kp T
-/* Top  R */  &kp Y            &kp U            &kp I            &kp O            &kp P            &kp BSLH
-/* Home L */  &kp CAPS         &hml LSHFT A     &hml LALT S      &hml LCTRL D     &hml LGUI F      &kp G
-/* Home R */  &kp H            &hmr RGUI J      &hmr RCTRL K     &hmr RALT L      &hmr RSHFT SEMI  &kp SQT
-/* Bot  L */  &caps_word       &kp Z            &kp X            &kp C            &kp V            &kp B
-/* Bot  R */  &kp N            &kp M            &kp COMMA        &kp DOT          &kp FSLH         &none
-/* Innr L */  &bootloader      &kp LS(LG(LBKT)) &kp LC(GRAVE)    &kp LG(GRAVE)    &kp LC(LEFT)
-/* Innr R */  &kp RC(RIGHT)    &kp RC(UP)       &kp LC(LS(GRAVE)) &kp LS(LG(RBKT)) &bootloader
-/* ThmA  L|R */  &lt 1 ESC             &lt 5 DEL             &kp LC(LG(Q))          &lt 4 LS(LC(LA(LG(C)))) &lt 5 TAB             &lt 1 RET
-/* ThmB  L|R */  &lt 2 BSPC            &lt 8 LS(LG(A))       &mo 7                   &mo 6                 &lt 8 TAB             &lt 2 SPACE
+&kp GRAVE    &kp N1            &kp N2         &kp N3         &kp N4        &kp N5                            &kp N6                   &kp N7         &kp N8        &kp N9             &kp N0            &kp MINUS
+&kp TAB      &kp Q             &kp W          &kp E          &kp R         &kp T                             &kp Y                    &kp U          &kp I         &kp O              &kp P             &kp BSLH
+&caps_word   &hml LSHFT A      &hml LALT S    &hml LCTRL D   &hml LGUI F   &kp G                             &kp H                    &hmr RGUI J    &hmr RCTRL K  &hmr RALT L        &hmr RSHFT SEMI   &kp SQT
+&none        &kp Z             &kp X          &kp C          &kp V         &kp B                             &kp N                    &kp M          &kp COMMA     &kp DOT            &kp FSLH          &none
+&bootloader  &kp LS(LG(LBKT))  &kp LC(GRAVE)  &kp LG(GRAVE)  &kp LC(LEFT)                                                             &kp RC(RIGHT)  &kp RC(UP)    &kp LC(LS(GRAVE))  &kp LS(LG(RBKT))  &bootloader
+                                                             &lt 1 ESC     &lt 5 DEL        &kp LC(LG(Q))    &lt 4 LS(LC(LA(LG(C))))  &lt 5 TAB      &lt 1 RET
+                                                             &lt 2 BSPC    &lt 8 LS(LG(A))  &mo 7            &mo 6                    &lt 8 TAB      &lt 2 SPACE
             >;
         };
 
         /* ── 1: Nav ───────────────────────────────────────── */
+
         nav_layer {
             display-name = "Nav";
             bindings = <
-/* Num  L */  &trans           &trans           &trans           &trans           &trans           &trans
-/* Num  R */  &trans           &trans           &trans           &trans           &trans           &trans
-/* Top  L */  &kp LG(Y)        &kp LG(Z)        &kp LG(X)        &kp LG(C)        &kp LG(V)        &kp LS(LG(V))
-/* Top  R */  &none            &kp LG(UP)       &kp LA(UP)       &kp RA(DOWN)     &kp RG(DOWN)     &none
-/* Home L */  &none            &kp LA(RIGHT)    &kp LG(LEFT)     &kp LG(RIGHT)    &kp LA(LEFT)     &kp LG(BSPC)
-/* Home R */  &kp RG(LEFT)     &kp LEFT         &kp UP           &kp DOWN         &kp RIGHT        &kp RG(RIGHT)
-/* Bot  L */  &none            &kp LA(BSPC)     &kp LG(BSPC)     &kp LC(K)        &kp LA(DEL)      &none
-/* Bot  R */  &none            &kp LA(LEFT)     &kp RG(LEFT)     &kp RG(RIGHT)    &kp RA(RIGHT)    &none
-/* Innr L */  &trans           &trans           &trans           &trans           &trans
-/* Innr R */  &trans           &trans           &trans           &trans           &trans
-/* ThmA  L|R */  &lt 2 DEL             &lt 5 ESC             &trans                  &trans                &mo 5                 &lt 4 RET
-/* ThmB  L|R */  &lt 1 BSPC            &trans                &trans                  &trans                &lt 4 TAB             &lt 1 SPACE
+&trans     &trans         &trans        &trans         &trans        &trans                   &trans        &trans        &trans        &trans         &trans         &trans
+&kp LG(Y)  &kp LG(Z)      &kp LG(X)     &kp LG(C)      &kp LG(V)     &kp LS(LG(V))            &none         &kp LG(UP)    &kp LA(UP)    &kp RA(DOWN)   &kp RG(DOWN)   &none
+&none      &kp LA(RIGHT)  &kp LG(LEFT)  &kp LG(RIGHT)  &kp LA(LEFT)  &kp LG(BSPC)             &kp RG(LEFT)  &kp LEFT      &kp UP        &kp DOWN       &kp RIGHT      &kp RG(RIGHT)
+&none      &kp LA(BSPC)   &kp LG(BSPC)  &kp LC(K)      &kp LA(DEL)   &none                    &none         &kp LA(LEFT)  &kp RG(LEFT)  &kp RG(RIGHT)  &kp RA(RIGHT)  &none
+&trans     &trans         &trans        &trans         &trans                                               &trans        &trans        &trans         &trans         &trans
+                                                       &lt 2 DEL     &lt 5 ESC      &trans    &trans        &mo 5         &lt 4 RET
+                                                       &lt 1 BSPC    &trans         &trans    &trans        &lt 4 TAB     &lt 1 SPACE
             >;
         };
 
         /* ── 2: Sym ───────────────────────────────────────── */
+
         sym_layer {
             display-name = "Sym";
             bindings = <
-/* Num  L */  &kp GRAVE        &kp LS(N1)       &kp LS(N2)       &kp LS(N3)       &kp LS(N4)       &kp LS(N5)
-/* Num  R */  &none            &kp LS(N7)       &kp LS(N8)       &none            &none            &none
-/* Top  L */  &kp LS(GRAVE)    &kp LS(N9)       &kp LS(LBKT)     &kp LS(RBKT)     &kp LS(N0)       &kp KP_PLUS
-/* Top  R */  &none            &none            &none            &none            &none            &none
-/* Home L */  &kp LS(N6)       &kp EQUAL        &kp SQT          &kp LS(SQT)      &kp LS(MINUS)    &kp KP_MULTIPLY
-/* Home R */  &none            &kp RGUI         &kp RSHFT        &kp RALT         &kp RCTRL        &none
-/* Bot  L */  &kp LS(FSLH)     &kp LS(COMMA)    &kp LBKT         &kp RBKT         &kp LS(DOT)      &kp KP_MINUS
-/* Bot  R */  &none            &none            &none            &none            &none            &none
-/* Innr L */  &kp LS(N7)       &kp LS(BSLH)     &kp COMMA        &kp LS(FSLH)     &kp KP_DIVIDE
-/* Innr R */  &none            &none            &none            &none            &none
-/* ThmA  L|R */  &lt 2 DEL             &lt 5 ESC             &none                   &trans                &trans                &lt 2 RET
-/* ThmB  L|R */  &lt 1 BSPC            &kp KP_DOT            &trans                  &trans                &lt 4 DEL             &lt 1 SPACE
+&kp GRAVE      &kp LS(N1)     &kp LS(N2)    &kp LS(N3)    &kp LS(N4)     &kp LS(N5)                 &none   &kp LS(N7)  &kp LS(N8)   &none     &none      &none
+&kp LS(GRAVE)  &kp LS(N9)     &kp LS(LBKT)  &kp LS(RBKT)  &kp LS(N0)     &kp KP_PLUS                &none   &none       &none        &none     &none      &none
+&kp LS(N6)     &kp EQUAL      &kp SQT       &kp LS(SQT)   &kp LS(MINUS)  &kp KP_MULTIPLY            &none   &kp RGUI    &kp RSHFT    &kp RALT  &kp RCTRL  &none
+&kp LS(FSLH)   &kp LS(COMMA)  &kp LBKT      &kp RBKT      &kp LS(DOT)    &kp KP_MINUS               &none   &none       &none        &none     &none      &none
+&kp LS(N7)     &kp LS(BSLH)   &kp COMMA     &kp LS(FSLH)  &kp KP_DIVIDE                                     &none       &none        &none     &none      &none
+                                                          &lt 2 DEL      &lt 5 ESC        &none     &trans  &trans      &lt 2 RET
+                                                          &lt 1 BSPC     &kp KP_DOT       &trans    &trans  &lt 4 DEL   &lt 1 SPACE
             >;
         };
 
         /* ── 3: FN / Numpad ───────────────────────────────── */
+
         fn_layer {
             display-name = "FN";
             bindings = <
-/* Num  L */  &kp F1           &kp F2           &kp F3           &kp F4           &kp F5           &kp F6
-/* Num  R */  &kp F7           &kp F8           &kp F9           &kp F10          &kp F11          &kp F12
-/* Top  L */  &none            &none            &none            &none            &none            &none
-/* Top  R */  &none            &kp KP_N7        &kp KP_N8        &kp KP_N9        &kp KP_DIVIDE    &none
-/* Home L */  &none            &none            &none            &none            &none            &none
-/* Home R */  &none            &kp KP_N4        &kp KP_N5        &kp KP_N6        &kp KP_MULTIPLY  &none
-/* Bot  L */  &none            &none            &none            &none            &none            &none
-/* Bot  R */  &none            &kp KP_N1        &kp KP_N2        &kp KP_N3        &kp KP_MINUS     &none
-/* Innr L */  &none            &none            &none            &none            &none
-/* Innr R */  &kp KP_N0        &kp KP_DOT       &kp KP_EQUAL     &kp KP_PLUS      &none
-/* ThmA  L|R */  &lt 2 SPACE           &lt 5 ESC             &trans                  &trans                &trans                &lt 2 RET
-/* ThmB  L|R */  &lt 1 BSPC            &trans                &trans                  &trans                &lt 4 DEL             &lt 3 TAB
+&kp F1  &kp F2  &kp F3  &kp F4  &kp F5       &kp F6               &kp F7  &kp F8     &kp F9      &kp F10       &kp F11          &kp F12
+&none   &none   &none   &none   &none        &none                &none   &kp KP_N7  &kp KP_N8   &kp KP_N9     &kp KP_DIVIDE    &none
+&none   &none   &none   &none   &none        &none                &none   &kp KP_N4  &kp KP_N5   &kp KP_N6     &kp KP_MULTIPLY  &none
+&none   &none   &none   &none   &none        &none                &none   &kp KP_N1  &kp KP_N2   &kp KP_N3     &kp KP_MINUS     &none
+&none   &none   &none   &none   &none                                     &kp KP_N0  &kp KP_DOT  &kp KP_EQUAL  &kp KP_PLUS      &none
+                                &lt 2 SPACE  &lt 5 ESC  &trans    &trans  &trans     &lt 2 RET
+                                &lt 1 BSPC   &trans     &trans    &trans  &lt 4 DEL  &lt 3 TAB
             >;
         };
 
         /* ── 4: Mouse ─────────────────────────────────────── */
+
         mouse_layer {
             display-name = "Mouse";
             bindings = <
-/* Num  L */  &none            &none            &none            &none            &none            &none
-/* Num  R */  &none            &none            &none            &none            &none            &none
-/* Top  L */  &none            &none            &none            &none            &none            &none
-/* Top  R */  &none            &none            &none            &none            &none            &none
-/* Home L */  &none            &mkp MB4         &mkp MB3         &mkp MB2         &mkp MB1         &none
-/* Home R */  &none            &none            &none            &none            &none            &none
-/* Bot  L */  &none            &none            &none            &none            &none            &none
-/* Bot  R */  &none            &none            &none            &none            &none            &none
-/* Innr L */  &none            &none            &none            &none            &none
-/* Innr R */  &none            &none            &none            &none            &none
-/* ThmA  L|R */  &lt 2 SPACE           &lt 5 ESC             &trans                  &trans                &mo 3                 &lt 4 RET
-/* ThmB  L|R */  &lt 1 BSPC            &trans                &trans                  &trans                &lt 4 DEL             &lt 1 TAB
+&none  &none     &none     &none     &none        &none                &none   &none      &none      &none  &none  &none
+&none  &none     &none     &none     &none        &none                &none   &none      &none      &none  &none  &none
+&none  &mkp MB4  &mkp MB3  &mkp MB2  &mkp MB1     &none                &none   &none      &none      &none  &none  &none
+&none  &none     &none     &none     &none        &none                &none   &none      &none      &none  &none  &none
+&none  &none     &none     &none     &none                                     &none      &none      &none  &none  &none
+                                     &lt 2 SPACE  &lt 5 ESC  &trans    &trans  &mo 3      &lt 4 RET
+                                     &lt 1 BSPC   &trans     &trans    &trans  &lt 4 DEL  &lt 1 TAB
             >;
         };
 
         /* ── 5: App (application shortcuts) ──────────────── */
+
         app_layer {
             display-name = "App";
             bindings = <
-/* Num  L */  &trans           &trans           &trans           &trans           &trans           &trans
-/* Num  R */  &trans           &trans           &trans           &trans           &trans           &trans
-/* Top  L */  &trans           &kp LG(S)        &kp LG(W)        &kp LC(LS(T))    &kp LG(KP_DIVIDE) &kp LS(LA(F))
-/* Top  R */  &kp LC(F)        &kp LG(H)        &kp RG(P)        &kp LS(LG(O))    &kp LS(LG(P))    &none
-/* Home L */  &trans           &kp LG(X)        &kp LG(C)        &kp LG(V)        &kp LG(Z)        &kp LC(LS(Z))
-/* Home R */  &kp F12          &kp LA(LEFT)     &kp LA(RIGHT)    &kp RS(F12)      &kp LG(GRAVE)    &trans
-/* Bot  L */  &trans           &trans           &m4              &m5              &trans           &trans
-/* Bot  R */  &trans           &trans           &trans           &trans           &trans           &trans
-/* Innr L */  &trans           &trans           &trans           &trans           &trans
-/* Innr R */  &trans           &trans           &trans           &trans           &trans
-/* ThmA  L|R */  &lt 2 SPACE           &lt 5 ESC             &trans                  &trans                &trans                &lt 1 RET
-/* ThmB  L|R */  &lt 1 BSPC            &trans                &trans                  &trans                &lt 4 DEL             &lt 3 TAB
+&trans  &trans     &trans     &trans         &trans             &trans                   &trans     &trans        &trans         &trans         &trans         &trans
+&trans  &kp LG(S)  &kp LG(W)  &kp LC(LS(T))  &kp LG(KP_DIVIDE)  &kp LS(LA(F))            &kp LC(F)  &kp LG(H)     &kp RG(P)      &kp LS(LG(O))  &kp LS(LG(P))  &none
+&trans  &kp LG(X)  &kp LG(C)  &kp LG(V)      &kp LG(Z)          &kp LC(LS(Z))            &kp F12    &kp LA(LEFT)  &kp LA(RIGHT)  &kp RS(F12)    &kp LG(GRAVE)  &trans
+&trans  &trans     &m4        &m5            &trans             &trans                   &trans     &trans        &trans         &trans         &trans         &trans
+&trans  &trans     &trans     &trans         &trans                                                 &trans        &trans         &trans         &trans         &trans
+                                             &lt 2 SPACE        &lt 5 ESC      &trans    &trans     &trans        &lt 1 RET
+                                             &lt 1 BSPC         &trans         &trans    &trans     &lt 4 DEL     &lt 3 TAB
             >;
         };
 
@@ -320,21 +313,17 @@
          *   Home row (increase):  A=hue+   S=sat+   D=bright+   F=speed+
          *   Bottom row (decrease):Z=hue-   X=sat-   C=bright-   V=speed-
          * Columns line up: A/Z=Hue  S/X=Saturation  D/C=Brightness  F/V=Speed */
+
         rgb_layer {
             display-name = "RGB";
             bindings = <
-/* Num  L */  &trans           &trans           &trans           &trans           &trans           &trans
-/* Num  R */  &trans           &trans           &trans           &trans           &trans           &trans
-/* Top  L */  &trans           &rgb_ug RGB_TOG  &rgb_ug RGB_EFF  &rgb_ug RGB_EFR  &trans           &trans
-/* Top  R */  &trans           &trans           &trans           &trans           &trans           &trans
-/* Home L */  &trans           &rgb_ug RGB_HUI  &rgb_ug RGB_SAI  &rgb_ug RGB_BRI  &rgb_ug RGB_SPI  &trans
-/* Home R */  &trans           &trans           &trans           &trans           &trans           &trans
-/* Bot  L */  &trans           &rgb_ug RGB_HUD  &rgb_ug RGB_SAD  &rgb_ug RGB_BRD  &rgb_ug RGB_SPD  &trans
-/* Bot  R */  &trans           &trans           &trans           &trans           &trans           &trans
-/* Innr L */  &trans           &trans           &trans           &trans           &trans
-/* Innr R */  &trans           &trans           &trans           &trans           &trans
-/* ThmA  L|R */  &trans                &trans                &trans                  &trans                &trans                &trans
-/* ThmB  L|R */  &trans                &trans                &trans                  &trans                &trans                &trans
+&trans  &trans           &trans           &trans           &trans           &trans            &trans  &trans  &trans  &trans  &trans  &trans
+&trans  &rgb_ug RGB_TOG  &rgb_ug RGB_EFF  &rgb_ug RGB_EFR  &trans           &trans            &trans  &trans  &trans  &trans  &trans  &trans
+&trans  &rgb_ug RGB_HUI  &rgb_ug RGB_SAI  &rgb_ug RGB_BRI  &rgb_ug RGB_SPI  &trans            &trans  &trans  &trans  &trans  &trans  &trans
+&trans  &rgb_ug RGB_HUD  &rgb_ug RGB_SAD  &rgb_ug RGB_BRD  &rgb_ug RGB_SPD  &trans            &trans  &trans  &trans  &trans  &trans  &trans
+&trans  &trans           &trans           &trans           &trans                                     &trans  &trans  &trans  &trans  &trans
+                                                           &trans           &trans  &trans    &trans  &trans  &trans
+                                                           &trans           &trans  &trans    &trans  &trans  &trans
             >;
         };
 
@@ -343,21 +332,17 @@
          * left thumb holds the layer:
          *   Home row:  J=play/pause   K=vol−   L=vol+   ;=mute
          *   Top row:   U=prev track   I=next track   O=bright−   P=bright+ */
+
         media_layer {
             display-name = "Media";
             bindings = <
-/* Num  L */  &trans           &trans           &trans           &trans           &trans           &trans
-/* Num  R */  &trans           &trans           &trans           &trans           &trans           &trans
-/* Top  L */  &trans           &trans           &trans           &trans           &trans           &trans
-/* Top  R */  &trans           &kp C_PREV       &kp C_NEXT       &kp C_BRI_DN     &kp C_BRI_UP     &trans
-/* Home L */  &trans           &trans           &trans           &trans           &trans           &trans
-/* Home R */  &trans           &kp C_PP         &kp C_VOL_DN     &kp C_VOL_UP     &kp C_MUTE       &trans
-/* Bot  L */  &trans           &trans           &trans           &trans           &trans           &trans
-/* Bot  R */  &trans           &trans           &trans           &trans           &trans           &trans
-/* Innr L */  &trans           &trans           &trans           &trans           &trans
-/* Innr R */  &trans           &trans           &trans           &trans           &trans
-/* ThmA  L|R */  &trans                &trans                &trans                  &trans                &trans                &trans
-/* ThmB  L|R */  &trans                &trans                &trans                  &trans                &trans                &trans
+&trans  &trans  &trans  &trans  &trans  &trans            &trans  &trans      &trans        &trans        &trans        &trans
+&trans  &trans  &trans  &trans  &trans  &trans            &trans  &kp C_PREV  &kp C_NEXT    &kp C_BRI_DN  &kp C_BRI_UP  &trans
+&trans  &trans  &trans  &trans  &trans  &trans            &trans  &kp C_PP    &kp C_VOL_DN  &kp C_VOL_UP  &kp C_MUTE    &trans
+&trans  &trans  &trans  &trans  &trans  &trans            &trans  &trans      &trans        &trans        &trans        &trans
+&trans  &trans  &trans  &trans  &trans                            &trans      &trans        &trans        &trans        &trans
+                                &trans  &trans  &trans    &trans  &trans      &trans
+                                &trans  &trans  &trans    &trans  &trans      &trans
             >;
         };
 
@@ -367,21 +352,17 @@
          * Hold the thumb opposite the hand you want to use:
          *   Left  home (A S D F): MissionCtl  SwitchWin  Desktop<-  Desktop->
          *   Right home (J K L ;): PrevTab  NextTab  ToggleTerm  NewTerm */
+
         wm_layer {
             display-name = "WM";
             bindings = <
-/* Num  L */  &trans           &trans           &trans           &trans           &trans           &trans
-/* Num  R */  &trans           &trans           &trans           &trans           &trans           &trans
-/* Top  L */  &trans           &trans           &trans           &trans           &trans           &trans
-/* Top  R */  &trans           &trans           &trans           &trans           &trans           &trans
-/* Home L */  &trans           &kp RC(UP)       &kp LG(GRAVE)    &kp LC(LEFT)     &kp RC(RIGHT)    &trans
-/* Home R */  &trans           &kp LS(LG(LBKT)) &kp LS(LG(RBKT)) &kp LC(GRAVE)    &kp LC(LS(GRAVE)) &trans
-/* Bot  L */  &trans           &trans           &trans           &trans           &trans           &trans
-/* Bot  R */  &trans           &trans           &trans           &trans           &trans           &trans
-/* Innr L */  &trans           &trans           &trans           &trans           &trans
-/* Innr R */  &trans           &trans           &trans           &trans           &trans
-/* ThmA  L|R */  &trans                &trans                &trans                  &trans                &trans                &trans
-/* ThmB  L|R */  &trans                &trans                &trans                  &trans                &trans                &trans
+&trans  &trans      &trans         &trans        &trans         &trans            &trans  &trans            &trans            &trans         &trans             &trans
+&trans  &trans      &trans         &trans        &trans         &trans            &trans  &trans            &trans            &trans         &trans             &trans
+&trans  &kp RC(UP)  &kp LG(GRAVE)  &kp LC(LEFT)  &kp RC(RIGHT)  &trans            &trans  &kp LS(LG(LBKT))  &kp LS(LG(RBKT))  &kp LC(GRAVE)  &kp LC(LS(GRAVE))  &trans
+&trans  &trans      &trans         &trans        &trans         &trans            &trans  &trans            &trans            &trans         &trans             &trans
+&trans  &trans      &trans         &trans        &trans                                   &trans            &trans            &trans         &trans             &trans
+                                                 &trans         &trans  &trans    &trans  &trans            &trans
+                                                 &trans         &trans  &trans    &trans  &trans            &trans
             >;
         };
     };
@@ -399,6 +380,7 @@
  *   - INPUT_TRANSFORM_Y_INVERT : natural scrolling (content follows the top of
  *                            the ball). Remove it for standard scroll direction.
  */
+
 &trackball_central_listener {
     input-processors =
         <&zip_xy_scaler 1 3>,
