@@ -197,8 +197,8 @@
 /* Bot  R */  &kp N            &kp M            &kp COMMA        &kp DOT          &kp FSLH         &none
 /* Innr L */  &td_boot         &kp LS(LG(LBKT)) &kp LC(GRAVE)    &kp LG(GRAVE)    &kp LC(LEFT)
 /* Innr R */  &kp RC(RIGHT)    &kp RC(UP)       &kp LC(LS(GRAVE)) &kp LS(LG(RBKT)) &td_boot
-/* ThmA  L|R */  &lt 1 ESC             &lt 5 DEL             &kp LC(LG(Q))           &kp LS(LC(LA(LG(C)))) &lt 5 TAB             &lt 1 RET
-/* ThmB  L|R */  &lt 2 BSPC            &kp LS(LG(A))         &mo 7                   &mo 6                 &lt 4 TAB             &lt 2 SPACE
+/* ThmA  L|R */  &lt 1 ESC             &lt 5 DEL             &kp LC(LG(Q))           &kp LS(LC(LA(LG(C)))) &lt 5 TAB             &lt 4 RET
+/* ThmB  L|R */  &lt 2 BSPC            &lt 8 LS(LG(A))       &mo 7                   &mo 6                 &lt 8 TAB             &lt 2 SPACE
             >;
         };
 
@@ -337,6 +337,30 @@
 /* Top  R */  &trans           &kp C_PREV       &kp C_NEXT       &kp C_BRI_DN     &kp C_BRI_UP     &trans
 /* Home L */  &trans           &trans           &trans           &trans           &trans           &trans
 /* Home R */  &trans           &kp C_PP         &kp C_VOL_DN     &kp C_VOL_UP     &kp C_MUTE       &trans
+/* Bot  L */  &trans           &trans           &trans           &trans           &trans           &trans
+/* Bot  R */  &trans           &trans           &trans           &trans           &trans           &trans
+/* Innr L */  &trans           &trans           &trans           &trans           &trans
+/* Innr R */  &trans           &trans           &trans           &trans           &trans
+/* ThmA  L|R */  &trans                &trans                &trans                  &trans                &trans                &trans
+/* ThmB  L|R */  &trans                &trans                &trans                  &trans                &trans                &trans
+            >;
+        };
+
+        /* ── 8: WM (window / desktop / tab / terminal navigation) ──
+         * The heavily-used inner-row keys, cloned onto the home row and
+         * reached by holding a middle thumb-bottom key (either hand).
+         * Hold the thumb opposite the hand you want to use:
+         *   Left  home (A S D F): MissionCtl  SwitchWin  Desktop<-  Desktop->
+         *   Right home (J K L ;): PrevTab  NextTab  ToggleTerm  NewTerm */
+        wm_layer {
+            display-name = "WM";
+            bindings = <
+/* Num  L */  &trans           &trans           &trans           &trans           &trans           &trans
+/* Num  R */  &trans           &trans           &trans           &trans           &trans           &trans
+/* Top  L */  &trans           &trans           &trans           &trans           &trans           &trans
+/* Top  R */  &trans           &trans           &trans           &trans           &trans           &trans
+/* Home L */  &trans           &kp RC(UP)       &kp LG(GRAVE)    &kp LC(LEFT)     &kp RC(RIGHT)    &trans
+/* Home R */  &trans           &kp LS(LG(LBKT)) &kp LS(LG(RBKT)) &kp LC(GRAVE)    &kp LC(LS(GRAVE)) &trans
 /* Bot  L */  &trans           &trans           &trans           &trans           &trans           &trans
 /* Bot  R */  &trans           &trans           &trans           &trans           &trans           &trans
 /* Innr L */  &trans           &trans           &trans           &trans           &trans
