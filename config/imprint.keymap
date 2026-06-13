@@ -8,7 +8,7 @@
  *   Top   [12–17 L | 18–23 R]:  L: TAB Q W E R T       R: Y U I O P \
  *   Home  [24–29 L | 30–35 R]:  L: CAPS A(HRM) S(HRM) D(HRM) F(HRM) G   R: H J(HRM) K(HRM) L(HRM) ;(HRM) '
  *   Bot   [36–41 L | 42–47 R]:  L: CapsWd Z X C V B    R: N M , . / —
- *   Innr  [48–52 L | 53–57 R]:  outer corners (48 & 57) = td_boot
+ *   Innr  [48–52 L | 53–57 R]:  outer corners (48 & 57) = &bootloader (single press)
  *   ThmA  [58–60 L | 61–63 R]:  top thumb row
  *   ThmB  [64–69]:  bottom thumb row — 66 = &mo 7 (Media), 67 = &mo 6 (RGB)
  *
@@ -186,18 +186,6 @@
             hold-trigger-on-release;
             bindings = <&kp>, <&kp>;
         };
-
-        /* Bottom-outer corner on each half (inner-row outermost key:
-         * position 48 on the left, position 57 on the right — the left one
-         * is the TD(0) key on the wired board). 1 tap = nothing, 2 taps =
-         * bootloader. &bootloader is source-aware, so each corner resets its
-         * own half. tapping-term 200ms matches the Vial tap-dance term. */
-        td_boot: tap_dance_bootloader {
-            compatible = "zmk,behavior-tap-dance";
-            #binding-cells = <0>;
-            tapping-term-ms = <200>;
-            bindings = <&none>, <&bootloader>;
-        };
     };
 
     /* ═══════════════════════════════════════════════════════
@@ -222,8 +210,8 @@
 /* Home R */  &kp H            &hmr RGUI J      &hmr RCTRL K     &hmr RALT L      &hmr RSHFT SEMI  &kp SQT
 /* Bot  L */  &caps_word       &kp Z            &kp X            &kp C            &kp V            &kp B
 /* Bot  R */  &kp N            &kp M            &kp COMMA        &kp DOT          &kp FSLH         &none
-/* Innr L */  &td_boot         &kp LS(LG(LBKT)) &kp LC(GRAVE)    &kp LG(GRAVE)    &kp LC(LEFT)
-/* Innr R */  &kp RC(RIGHT)    &kp RC(UP)       &kp LC(LS(GRAVE)) &kp LS(LG(RBKT)) &td_boot
+/* Innr L */  &bootloader      &kp LS(LG(LBKT)) &kp LC(GRAVE)    &kp LG(GRAVE)    &kp LC(LEFT)
+/* Innr R */  &kp RC(RIGHT)    &kp RC(UP)       &kp LC(LS(GRAVE)) &kp LS(LG(RBKT)) &bootloader
 /* ThmA  L|R */  &lt 1 ESC             &lt 5 DEL             &kp LC(LG(Q))          &lt 4 LS(LC(LA(LG(C)))) &lt 5 TAB             &lt 1 RET
 /* ThmB  L|R */  &lt 2 BSPC            &lt 8 LS(LG(A))       &mo 7                   &mo 6                 &lt 8 TAB             &lt 2 SPACE
             >;
