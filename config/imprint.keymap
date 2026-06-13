@@ -6,8 +6,8 @@
  * 70 keys, interleaved LEFT-then-RIGHT within each row:
  *   Num   [ 0– 5 L | 6–11  R]:  L: GRAVE 1 2 3 4 5     R: 6 7 8 9 0 -
  *   Top   [12–17 L | 18–23 R]:  L: TAB Q W E R T       R: Y U I O P \
- *   Home  [24–29 L | 30–35 R]:  L: CAPS A(HRM) S(HRM) D(HRM) F(HRM) G   R: H J(HRM) K(HRM) L(HRM) ;(HRM) '
- *   Bot   [36–41 L | 42–47 R]:  L: CapsWd Z X C V B    R: N M , . / —
+ *   Home  [24–29 L | 30–35 R]:  L: CapsWd A(HRM) S(HRM) D(HRM) F(HRM) G   R: H J(HRM) K(HRM) L(HRM) ;(HRM) '
+ *   Bot   [36–41 L | 42–47 R]:  L: ▢ Z X C V B    R: N M , . / —
  *   Innr  [48–52 L | 53–57 R]:  outer corners (48 & 57) = &bootloader (single press)
  *   ThmA  [58–60 L | 61–63 R]:  top thumb row
  *   ThmB  [64–69]:  bottom thumb row — 66 = &mo 7 (Media), 67 = &mo 6 (RGB)
@@ -27,7 +27,7 @@
  *   ,(44) + C(39)      → m3  "<="
  *
  * ── Home-row mods (positional / split: &hml left, &hmr right) ─────
- *   Left : CAPS | A=LSHFT | S=LALT | D=LCTRL | F=LGUI | G
+ *   Left : CapsWd | A=LSHFT | S=LALT | D=LCTRL | F=LGUI | G
  *   Right: H    | J=RGUI  | K=RCTRL| L=RALT  | ;=RSHFT| '
  *   flavor=balanced, tapping-term=175ms, quick-tap=270ms, prior-idle=125ms.
  *   Mod engages only when the next key is on the opposite hand or a thumb. */
