@@ -30,7 +30,7 @@
  *   Left : CapsWd | A=LSHFT | S=LALT | D=LCTRL | F=LGUI | G
  *   Right: H    | J=RGUI  | K=RCTRL| L=RALT  | ;=RSHFT| '
  *   flavor=balanced, tapping-term=175ms, quick-tap=270ms, prior-idle=125ms.
- *   Mod engages only when the next key is on the opposite hand or a thumb. */
+ *   Mod engages only when the next key is on the opposite hand or a thumb.
 
 *
  * ── Vial timing settings used ────────────────────────────────────
