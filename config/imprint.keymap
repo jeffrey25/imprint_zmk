@@ -374,8 +374,9 @@
  *
  * This block modifies the existing central-trackball input listener so the
  * left ball emits scroll events instead of cursor movement. Tunables:
- *   - &zip_xy_scaler 1 3   : speed = multiply by 1, divide by 3. Raise the
- *                            divisor to scroll slower, lower it to scroll faster.
+ *   - &zip_xy_scaler 1 6   : speed = multiply by 1, divide by 6. Raise the
+ *                            divisor to scroll slower, lower it to scroll
+ *                            faster (max 16). Was 3; bumped to 6 to calm it.
  *   - &zip_xy_to_scroll_mapper : converts pointer motion into scroll events.
  *   - INPUT_TRANSFORM_Y_INVERT : natural scrolling (content follows the top of
  *                            the ball). Remove it for standard scroll direction.
@@ -383,7 +384,27 @@
 
 &trackball_central_listener {
     input-processors =
-        <&zip_xy_scaler 1 3>,
+        <&zip_xy_scaler 1 6>,
         <&zip_xy_to_scroll_mapper>,
         <&zip_scroll_transform INPUT_TRANSFORM_Y_INVERT>;
+};
+
+/* ── Auto mouse layer (right / cursor ball → Mouse layer) ────────────
+ * Moving the right trackball temporarily enables layer 4 (Mouse), so the
+ * MB1–4 keys under your left fingers go live without a manual thumb hold.
+ * It switches off 1s after the ball stops. The manual Mouse hold still works.
+ *   - 4         : Mouse layer index
+ *   - 1000      : ms the layer lingers after the last movement (Cyboard's
+ *                 sample used 500; bump it if the layer drops before you click)
+ *   - require-prior-idle-ms : don't activate within 150ms of a keypress, so
+ *                 typing vibration / a stray brush won't pop mouse mode
+ *   - excluded-positions    : MB4 MB3 MB2 MB1 (25-28) — clicking them keeps
+ *                 the layer alive; pressing anything else exits it */
+&zip_temp_layer {
+    require-prior-idle-ms = <150>;
+    excluded-positions = <25 26 27 28>;
+};
+
+&trackball_peripheral_listener {
+    input-processors = <&zip_temp_layer 4 1000>;
 };
