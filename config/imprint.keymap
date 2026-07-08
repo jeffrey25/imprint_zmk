@@ -57,10 +57,14 @@
 #define THUMBS  58 59 60 61 62 63 64 65 66 67 68 69
 
 / {
-    /* Matrix transform selected by the stock keymap — this is the key-position
-     * order the bindings below (thumbs included) are written against. */
+    /* Physical layout selects the key-position order the bindings below
+     * (thumbs included) are written against. We pick number_row_full_bottom_row
+     * (70 keys) — same underlying transform as before, so binding order is
+     * unchanged. NOTE: for ZMK Studio we must select a *physical-layout*, NOT a
+     * chosen matrix-transform. A chosen zmk,matrix-transform disables Studio and
+     * makes the Cyboard shield fall back to a synthetic layout. */
 
-    chosen { zmk,matrix-transform = &imprint_number_row_full_bottom_row; };
+    chosen { zmk,physical-layout = &physical_layout_imprint_number_row_full_bottom_row; };
 
     /* ═══════════════════════════════════════════════════════
      *  MACROS
